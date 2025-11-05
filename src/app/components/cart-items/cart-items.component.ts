@@ -4,6 +4,7 @@ import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { Item } from '../../models/item.model';
 import { CartService } from '../../service/cart.service';
+import { OrderService } from '../../service/orders.service';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-cart-items',
@@ -13,10 +14,13 @@ import Swal from 'sweetalert2';
   styleUrls: ['./cart-items.component.css']
 })
 export class CartItemsComponent implements OnInit {
-  cartItems: Item[] = [];
+ cartItems: Item[] = [];
   selectedItems: Item[] = [];
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private orderService: OrderService // ✅ inject OrderService
+  ) {}
 
   ngOnInit(): void {
     this.cartItems = this.cartService.getCartItems();
@@ -30,9 +34,11 @@ export class CartItemsComponent implements OnInit {
       this.selectedItems = this.selectedItems.filter(i => i !== item);
     }
   }
- getTotalPrice(): number {
+
+  getTotalPrice(): number {
     return this.selectedItems.reduce((total, item) => total + (item.price || 0), 0);
   }
+
   confirmOrder(): void {
     if (this.selectedItems.length === 0) {
       Swal.fire({
@@ -43,17 +49,20 @@ export class CartItemsComponent implements OnInit {
       return;
     }
 
+    // ✅ Save confirmed orders to OrderService
+    this.selectedItems.forEach(item => this.orderService.addOrder(item));
+
     const orderList = this.selectedItems.map(i => i.name).join('<br>');
 
     Swal.fire({
       title: 'Order Confirmed! 🎉',
-      html: `<b>You ordered:</b><br>${orderList}`,
+      html: `<b>You ordered:</b><br>${orderList}<br><br><b>Total:</b> Rs ${this.getTotalPrice().toFixed(2)}`,
       icon: 'success',
       confirmButtonText: 'OK'
     });
 
-    this.cartService.clearCart();
-    this.cartItems = [];
+    // ✅ Clear cart and selection
+  
     this.selectedItems = [];
   }
 }

@@ -1,0 +1,32 @@
+<app-admin-nav></app-admin-nav>
+
+<div class="orders-container">
+  <h2 class="orders-title">📦 Recent Orders</h2>
+
+  <!-- If no orders -->
+  <div *ngIf="orders.length === 0" class="empty-orders text-center">
+    <img src="assets/images/empty-box.png" alt="No Orders" class="empty-img" />
+    <p class="mt-3">No recent orders available.</p>
+  </div>
+
+  <!-- Orders Grid -->
+  <div *ngIf="orders.length > 0" class="orders-grid">
+    <div class="order-card" *ngFor="let order of orders">
+      <div class="order-image">
+        <img [src]="order.image_url" [alt]="order.name" (error)="order.image_url='assets/images/fallback.jpg'">
+      </div>
+
+      <div class="order-details">
+        <h5>{{ order.name }}</h5>
+        <p class="price">RS{{ order.price?.toFixed(2) }}</p>
+        <p class="date">Ordered on: {{ order.orderDate || (today | date:'mediumDate') }}</p>
+      </div>
+
+      <div class="order-status">
+        <span class="badge bg-success">Confirmed</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

@@ -4,11 +4,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Item } from '../../../models/item.model';
 import { ItemService } from '../../../service/item.service';
-
+import { AdminNavComponent } from '../../../header/admin-nav/admin-nav.component';
 @Component({
   selector: 'app-manage-items',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, AdminNavComponent],
   templateUrl: './manage-items.component.html',
   styleUrls: ['./manage-items.component.css']
 })

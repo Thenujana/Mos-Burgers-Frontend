@@ -1,6 +1,5 @@
 // app.routes.ts
 import { Routes } from '@angular/router';
-
 export const routes: Routes = [
   { 
     path: '', 
@@ -37,6 +36,10 @@ export const routes: Routes = [
   { 
     path: 'admin', 
     loadComponent: () => import('./components/admin/admin.component').then(m => m.AdminComponent)
+  },
+   { 
+    path: 'orders', 
+    loadComponent: () => import('./components/oders-page/oders-page.component').then(m => m.OdersPageComponent)
   },
 
   { 

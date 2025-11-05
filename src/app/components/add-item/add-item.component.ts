@@ -1,104 +1,4 @@
-// import { CommonModule } from '@angular/common';
-// import { HttpClientModule } from '@angular/common/http';
-// import { Component } from '@angular/core';
-// import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-// import { ItemService } from '../../service/item.service';
-// import { Router } from '@angular/router';
-// import { Item } from '../../models/item.model';
 
-// @Component({
-//   selector: 'app-add-item',
-//   standalone: true,
-//   imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
-//   providers: [ItemService],
-//   templateUrl: './add-item.component.html',
-//   styleUrl: './add-item.component.css'
-// })
-// export class AddItemComponent {
-//   itemForm: FormGroup;
-//   successMessage = '';
-//   errorMessage = '';
-//   imagePreviewUrl: string | ArrayBuffer | null = null;
-//   selectedImageName: string = '';
-
-//   constructor(
-//     private fb: FormBuilder,
-//     private itemService: ItemService,
-//     private router: Router
-//   ) {
-//     this.itemForm = this.fb.group({
-//       name: ['', [Validators.required, Validators.maxLength(100)]],
-//       price: ['', [Validators.required, Validators.min(0.01), Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
-//       image_url: ['', Validators.required],
-//       exp_date: ['', [Validators.required, this.futureDateValidator]]
-//     });
-//   }
-
-//   futureDateValidator(control: any) {
-//     if (!control.value) return null;
-
-//     const selectedDate = new Date(control.value);
-//     const today = new Date();
-//     today.setHours(0, 0, 0, 0);
-
-//     return selectedDate > today ? null : { pastDate: true };
-//   }
-
-//   onImageSelected(event: Event): void {
-//     const fileInput = event.target as HTMLInputElement;
-//     if (fileInput.files && fileInput.files.length > 0) {
-//       const file = fileInput.files[0];
-//       this.selectedImageName = file.name;
-//       this.itemForm.patchValue({
-//         image_url: 'assets/images/' + file.name
-//       });
-
-//       const reader = new FileReader();
-//       reader.onload = () => {
-//         this.imagePreviewUrl = reader.result;
-//       };
-//       reader.readAsDataURL(file);
-//     }
-//   }
-
-//   onSubmit(): void {
-//     if (this.itemForm.invalid) {
-//       this.markFormGroupTouched();
-//       return;
-//     }
-
-//     const newItem: Item = {
-//       ...this.itemForm.value,
-//       price: parseFloat(this.itemForm.value.price),
-//     };
-
-//     this.itemService.addItem(newItem).subscribe({
-//       next: (response: string) => {
-//         this.successMessage = response || 'Item added successfully!';
-//         this.errorMessage = '';
-//         this.itemForm.reset();
-//         this.imagePreviewUrl = null;
-//         setTimeout(() => this.router.navigate(['/items']), 1000);
-//       },
-//       error: (err) => {
-//         console.error('Error adding item:', err);
-//         this.errorMessage = 'Failed to add item. Please try again.';
-//         this.successMessage = '';
-//       }
-//     });
-//   }
-
-//   private markFormGroupTouched(): void {
-//     Object.keys(this.itemForm.controls).forEach(key => {
-//       this.itemForm.get(key)?.markAsTouched();
-//     });
-//   }
-
-//   get name() { return this.itemForm.get('name'); }
-//   get price() { return this.itemForm.get('price'); }
-//   get image_url() { return this.itemForm.get('image_url'); }
-//   get exp_date() { return this.itemForm.get('exp_date'); }
-// }
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
@@ -106,11 +6,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ItemService } from '../../service/item.service';
 import { Router } from '@angular/router';
 import { Item } from '../../models/item.model';
-
+import { AdminNavComponent } from '../../header/admin-nav/admin-nav.component';
 @Component({
   selector: 'app-add-item',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule, AdminNavComponent],
   providers: [ItemService],
   templateUrl: './add-item.component.html',
   styleUrl: './add-item.component.css'
