@@ -1,0 +1,24 @@
+#about {
+  scroll-margin-top: 80px;
+}
+
+#about h2 {
+  font-weight: bold;
+}
+
+#about img {
+  max-height: 400px;
+  object-fit: cover;
+}
+span{
+    color: rgb(246, 167, 70);
+}
+.btn{
+    background-color: rgb(239, 160, 63);
+    color: #fff;
+
+}
+.btn:hover{
+    background-color: yellow;
+    color: black;
+}

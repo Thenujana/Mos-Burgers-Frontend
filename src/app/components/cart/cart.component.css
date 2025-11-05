@@ -1,0 +1,23 @@
+.cart-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #ffc107; /* Bootstrap warning color or any you like */
+  color: #fff;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  font-size: 24px;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+.cart-button:hover {
+  background-color: #e0a800;
+  color: #fff;
+  text-decoration: none;
+}

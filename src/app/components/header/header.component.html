@@ -1,0 +1,114 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand name" routerLink="/">MOS Burgers</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavContent"
+      aria-controls="navbarNavContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNavContent">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#about">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/menu">Menu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contact">Contact</a>
+        </li>
+      </ul>
+
+      <div class="d-flex align-items-center gap-3">
+        <!-- Search Container -->
+        <div class="search-container position-relative">
+          <div class="d-flex">
+            <div class="position-relative">
+              <input 
+                type="text" 
+                class="form-control search-input" 
+                placeholder="Search menu items..." 
+                [(ngModel)]="searchTerm"
+                (input)="onSearchChange()"
+                (keypress)="onSearchKeyPress($event)"
+                style="width: 250px; padding-right: 40px;">
+              
+              <button 
+                *ngIf="searchTerm" 
+                type="button" 
+                class="btn-clear position-absolute"
+                (click)="clearSearch()"
+                style="right: 35px; top: 50%; transform: translateY(-50%); border: none; background: none; color: #6c757d;">
+                <i class="bi bi-x-lg"></i>
+              </button>
+            </div>
+            
+            <button 
+              class="btn buttons ms-2" 
+              type="button"
+              (click)="onSearchSubmit()">
+              <i class="bi bi-search"></i>
+            </button>
+          </div>
+
+          <!-- Search Results -->
+          <div 
+            *ngIf="showResults" 
+            class="search-results position-absolute bg-white border rounded shadow-lg mt-1 w-100"
+            style="z-index: 1050; max-height: 400px; overflow-y: auto; min-width: 350px;">
+            
+            <div class="p-2 bg-light border-bottom text-muted small" *ngIf="filteredItems.length > 0">
+              {{ getResultsText() }}
+            </div>
+
+            <div *ngIf="filteredItems.length > 0">
+              <div 
+                *ngFor="let item of filteredItems" 
+                class="search-result-item d-flex align-items-center p-3 border-bottom"
+                (click)="onItemSelect(item)"
+                style="cursor: pointer;">
+                
+                <img 
+                  [src]="getItemImage(item)" 
+                  [alt]="item.name"
+                  class="rounded me-3"
+                  style="width: 50px; height: 50px; object-fit: cover;"
+                  (error)="onImageError($event)">
+                
+                <div class="flex-grow-1">
+                  <h6 class="mb-0 fw-bold">{{ item.name }}</h6>
+                  <small class="text-muted">{{ item.category }}</small>
+                </div>
+                
+                <div class="text-primary fw-bold">
+                  {{ item.price }}
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="filteredItems.length === 0 && searchTerm" class="p-4 text-center text-muted">
+              <i class="bi bi-search mb-2" style="font-size: 2rem; opacity: 0.3;"></i>
+              <p class="mb-1">No items found for "{{ searchTerm }}"</p>
+              <small>Try searching for burgers, sides, or drinks</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cart Icon -->
+        <a class="btn btn-outline-dark position-relative" routerLink="/cart-items" aria-label="View Cart">
+          <i class="bi bi-cart-fill" style="font-size: 1.3rem;"></i>
+         
+        </a>
+
+        <!-- Logout Button -->
+        <button class="btn btn-outline-danger ms-2" (click)="logout()">
+          <i class="bi bi-box-arrow-right"></i> Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>

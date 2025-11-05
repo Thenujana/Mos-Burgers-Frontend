@@ -1,0 +1,40 @@
+
+<div class="login-wrapper d-flex align-items-center justify-content-center min-vh-100">
+  <div class="login-card glass-card p-4 p-md-5">
+    <div class="text-center mb-4">
+      <img src="assets/images/small logo for a burger website without the background.png" 
+           alt="MOS Burgers Logo" 
+           class="img-fluid logo mb-3" 
+           width="80">
+      <h2 class="fw-bold text-brand">MOS Burgers</h2>
+      <p class="text-light small mb-0">Login to your account</p>
+    </div>
+
+    <form (ngSubmit)="onLogin()" #loginForm="ngForm" novalidate>
+      <div class="mb-3">
+        <label for="email" class="form-label text-light">Email</label>
+        <input type="email" [(ngModel)]="email" name="email" id="email" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label text-light">Password</label>
+        <input type="password" [(ngModel)]="password" name="password" id="password" class="form-control" required>
+      </div>
+
+      <div class="mb-4">
+        <label for="role" class="form-label text-light">Login as</label>
+        <select class="form-select" [(ngModel)]="role" name="role" id="role" required>
+          <option value="" disabled selected>Select role</option>
+          <option value="admin">Admin</option>
+          <option value="customer">Customer</option>
+        </select>
+      </div>
+
+      <button class="btn btn-brand w-100" [disabled]="!loginForm.valid">Login</button>
+
+      <div *ngIf="loginError" class="alert alert-danger mt-3 text-center py-2">
+        {{ loginError }}
+      </div>
+    </form>
+  </div>
+</div>

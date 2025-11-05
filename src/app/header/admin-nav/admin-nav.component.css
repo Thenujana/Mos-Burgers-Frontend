@@ -1,0 +1,13 @@
+.sidebar {
+  background-color: #1e1e1e;
+}
+
+.nav-link {
+  color: #ccc;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #ffc107;
+  transform: translateX(4px);
+}

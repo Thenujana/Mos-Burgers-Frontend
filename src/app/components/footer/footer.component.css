@@ -1,0 +1,8 @@
+footer {
+  a:hover {
+    color: #ffc107 !important;
+  }
+  i {
+    font-size: 1.2rem;
+  }
+}

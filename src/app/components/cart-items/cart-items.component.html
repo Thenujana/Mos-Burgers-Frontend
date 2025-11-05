@@ -1,0 +1,28 @@
+<app-header></app-header>
+
+<div class="cart-container">
+  <h2 class="cart-title">🛒 Your Cart</h2>
+
+  <div *ngIf="cartItems.length === 0" class="empty-cart">
+    <p>Your cart is empty.</p>
+  </div>
+
+  <div *ngIf="cartItems.length > 0" class="cart-grid">
+    <div class="cart-card" *ngFor="let item of cartItems">
+      <input type="checkbox" (change)="toggleSelection(item, $event)" />
+      <img [src]="item.image_url" [alt]="item.name" class="cart-image" />
+      <div class="cart-info">
+        <h5>{{ item.name }}</h5>
+        <p>RS{{ item.price?.toFixed(2) }}</p>
+      </div>
+      
+    </div>
+
+    <button class="confirm-btn" (click)="confirmOrder()">Confirm Order</button>
+  </div>
+  <div class="cart-total">
+      <h3>Total: RS{{ getTotalPrice() | number: '1.2-2' }}</h3>
+    </div>
+</div>
+
+<app-footer></app-footer>

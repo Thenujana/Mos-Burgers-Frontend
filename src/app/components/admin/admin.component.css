@@ -1,0 +1,30 @@
+.dashboard-container {
+  margin-left: 0; /* Remove left margin for full width */
+  background-color: #f8f9fa; /* Bootstrap light gray */
+  min-height: 100vh;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+/* Icon wrapper for cards */
+.icon-wrapper {
+  width: 56px;
+  height: 56px;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+}
+
+/* Card hover effect */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+/* Responsive padding adjustment */
+@media (max-width: 767.98px) {
+  .dashboard-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
